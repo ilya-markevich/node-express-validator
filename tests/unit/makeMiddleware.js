@@ -8,7 +8,7 @@ const testData = require('./data/makeMiddleware');
 
 describe('Make Middleware', () => {
   describe('middleware', () => {
-    it('should return errors', () => {
+    it('should add validator to request', () => {
       const { fakeRequest } = testData;
       const next = sinon.mock().once();
 
