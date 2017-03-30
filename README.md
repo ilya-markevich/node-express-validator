@@ -1,9 +1,13 @@
 # Express Dee Validator
+
+[![npm](https://img.shields.io/npm/v/express-dee-validator.svg?maxAge=1000)](https://www.npmjs.com/package/express-dee-validator)
+[![npm](https://img.shields.io/npm/dt/express-dee-validator.svg?maxAge=1000)](https://www.npmjs.com/package/express-dee-validator)
 [![Coverage Status](https://coveralls.io/repos/github/ilya-markevich/node-express-validator/badge.svg?branch=master)](https://coveralls.io/github/ilya-markevich/node-express-validator?branch=master)
 [![dependency Status](https://img.shields.io/david/ilya-markevich/node-express-validator.svg?maxAge=1000)](https://david-dm.org/ilya-markevich/node-express-validator)
 [![devDependency Status](https://img.shields.io/david/dev/ilya-markevich/node-express-validator.svg?maxAge=1000)](https://david-dm.org/ilya-markevich/node-express-validator?type=dev)
 [![Build Status](https://img.shields.io/travis/ilya-markevich/node-express-validator.svg?maxAge=1000)](https://travis-ci.org/ilya-markevich/node-express-validator)
 [![Known Vulnerabilities](https://snyk.io/test/github/ilya-markevich/node-express-validator/badge.svg)](https://snyk.io/test/github/ilya-markevich/node-express-validator)
+[![node](https://img.shields.io/node/v/express-dee-validator.svg?maxAge=1000)](https://www.npmjs.com/package/express-dee-validator)
 
 Validator for Express framework.
 
