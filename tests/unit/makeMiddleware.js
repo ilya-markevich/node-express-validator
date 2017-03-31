@@ -11,8 +11,9 @@ describe('Make Middleware', () => {
     it('should add validator to request', () => {
       const { fakeRequest } = testData;
       const next = sinon.mock().once();
+      const middleware = makeMiddleware(null);
 
-      makeMiddleware(fakeRequest, {}, next);
+      middleware(fakeRequest, {}, next);
 
       fakeRequest.should.have.property('validator');
       next.verify();

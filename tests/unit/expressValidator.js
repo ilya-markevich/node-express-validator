@@ -10,12 +10,22 @@ const testData = require('./data/expressValidator');
 
 describe('Express Validator', () => {
   describe('Initial State', () => {
-    const { fakeRequest } = testData;
-    const validator = new ExpressValidator(fakeRequest);
+    it('should check initial state', () => {
+      const { fakeRequest } = testData;
+      const validator = new ExpressValidator(fakeRequest);
 
-    (validator.queryValidator instanceof Validator).should.be.eql(true);
-    (validator.bodyValidator instanceof Validator).should.be.eql(true);
-    (validator.paramsValidator instanceof Validator).should.be.eql(true);
+      (validator.queryValidator instanceof Validator).should.be.eql(true);
+      (validator.bodyValidator instanceof Validator).should.be.eql(true);
+      (validator.paramsValidator instanceof Validator).should.be.eql(true);
+    });
+  });
+
+  describe('Static Methods', () => {
+    describe('#extend', () => {
+      it('should call extend even if methods not passed', () => {
+        ExpressValidator.extend(null);
+      });
+    });
   });
 
   describe('#hasErrors', () => {

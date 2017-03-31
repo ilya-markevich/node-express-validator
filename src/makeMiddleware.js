@@ -2,7 +2,11 @@
 
 const ExpressValidator = require('./expressValidator');
 
-module.exports = (req, res, next) => {
-  req.validator = new ExpressValidator(req);
-  next();
+module.exports = (customMethods) => {
+  return (req, res, next) => {
+    req.validator = new ExpressValidator(req);
+    ExpressValidator.extend(customMethods);
+
+    next();
+  };
 };

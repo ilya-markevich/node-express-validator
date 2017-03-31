@@ -35,6 +35,10 @@ class ExpressValidator {
       return errors.concat(validator.getErrors());
     }, []);
   }
+
+  static extend(customMethods) {
+    Validator.extend(Object(customMethods));
+  }
 }
 
 module.exports = ExpressValidator;
