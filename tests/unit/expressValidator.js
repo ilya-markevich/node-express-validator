@@ -55,14 +55,14 @@ describe('Express Validator', () => {
 
   describe('#getErrors', () => {
     it('should return errors', () => {
-      const { fakeRequest } = testData;
+      const { fakeRequest, validatorError, expressValidatorErrors } = testData;
       const validator = new ExpressValidator(fakeRequest);
 
-      validator.bodyValidator.getErrors = sinon.stub().returns([{}]);
+      validator.bodyValidator.getErrors = sinon.stub().returns([validatorError]);
       validator.paramsValidator.getErrors = sinon.stub().returns([]);
       validator.queryValidator.getErrors = sinon.stub().returns([]);
 
-      validator.getErrors().should.have.length(1);
+      validator.getErrors().should.be.eql(expressValidatorErrors);
     });
   });
 });

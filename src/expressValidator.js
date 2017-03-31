@@ -35,10 +35,17 @@ class ExpressValidator {
   getErrors() {
     const self = this;
     const validators = [self.bodyValidator, self.paramsValidator, self.queryValidator];
+    const errorsObj = {};
 
-    return validators.reduce((errors, validator) => {
-      return errors.concat(validator.getErrors());
-    }, []);
+    validators.reduce((errors, validator) => errors.concat(validator.getErrors()), []).forEach(({ path, errorMessage, value }) => {
+      errorsObj[path] = {
+        param: path,
+        msg: errorMessage,
+        value
+      };
+    });
+
+    return errorsObj;
   }
 
   static extend(customMethods) {
