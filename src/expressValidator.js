@@ -7,6 +7,11 @@ class ExpressValidator {
     this._bodyValidator = new Validator(req.body);
     this._paramsValidator = new Validator(req.params);
     this._queryValidator = new Validator(req.query);
+    this._req = req;
+  }
+
+  get request() {
+    return this._req;
   }
 
   get bodyValidator() {

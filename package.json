@@ -4,7 +4,7 @@
     "name": "Ilya Markevich",
     "url": "https://github.com/ilya-markevich"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Object fields validator for express framework",
   "keywords": [
     "validator",
@@ -30,7 +30,7 @@
     "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
-    "dee-validator": "0.0.1"
+    "dee-validator": "^0.2.0"
   },
   "devDependencies": {
     "coveralls": "^2.12.0",

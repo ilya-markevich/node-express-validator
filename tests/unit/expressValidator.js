@@ -17,6 +17,7 @@ describe('Express Validator', () => {
       (validator.queryValidator instanceof Validator).should.be.eql(true);
       (validator.bodyValidator instanceof Validator).should.be.eql(true);
       (validator.paramsValidator instanceof Validator).should.be.eql(true);
+      validator.request.should.be.eql(fakeRequest);
     });
   });
 
