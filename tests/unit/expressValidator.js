@@ -4,8 +4,6 @@ require('should');
 const sinon = require('sinon');
 
 const ExpressValidator = require('../../src/expressValidator');
-const Validator = require('dee-validator');
-
 const testData = require('./data/expressValidator');
 
 describe('Express Validator', () => {
@@ -14,10 +12,23 @@ describe('Express Validator', () => {
       const { fakeRequest } = testData;
       const validator = new ExpressValidator(fakeRequest);
 
-      (validator.queryValidator instanceof Validator).should.be.eql(true);
-      (validator.bodyValidator instanceof Validator).should.be.eql(true);
-      (validator.paramsValidator instanceof Validator).should.be.eql(true);
+      (validator._queryValidator === null).should.be.eql(true);
+      (validator._bodyValidator === null).should.be.eql(true);
+      (validator._paramsValidator === null).should.be.eql(true);
       validator.request.should.be.eql(fakeRequest);
+    });
+
+    it('should check singleton getters', () => {
+      const { fakeRequest } = testData;
+      const validator = new ExpressValidator(fakeRequest);
+
+      const bodyValidator = validator.bodyValidator;
+      const paramsValidator = validator.paramsValidator;
+      const queryValidator = validator.queryValidator;
+
+      bodyValidator.should.be.eql(validator.bodyValidator);
+      paramsValidator.should.be.eql(validator.paramsValidator);
+      queryValidator.should.be.eql(validator.queryValidator);
     });
   });
 

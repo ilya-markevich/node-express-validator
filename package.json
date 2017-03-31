@@ -30,7 +30,7 @@
     "coveralls": "npm run cover && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
-    "dee-validator": "^0.2.0"
+    "dee-validator": "^0.3.0"
   },
   "devDependencies": {
     "coveralls": "^2.12.0",

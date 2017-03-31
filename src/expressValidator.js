@@ -4,9 +4,9 @@ const Validator = require('dee-validator');
 
 class ExpressValidator {
   constructor(req) {
-    this._bodyValidator = new Validator(req.body);
-    this._paramsValidator = new Validator(req.params);
-    this._queryValidator = new Validator(req.query);
+    this._bodyValidator = null;
+    this._paramsValidator = null;
+    this._queryValidator = null;
     this._req = req;
   }
 
@@ -15,15 +15,31 @@ class ExpressValidator {
   }
 
   get bodyValidator() {
-    return this._bodyValidator;
+    const self = this;
+
+    return self._getSingleton('_bodyValidator', self.request.body);
   }
 
   get paramsValidator() {
-    return this._paramsValidator;
+    const self = this;
+
+    return self._getSingleton('_paramsValidator', self.request.params);
   }
 
   get queryValidator() {
-    return this._queryValidator;
+    const self = this;
+
+    return self._getSingleton('_queryValidator', self.request.query);
+  }
+
+  _getSingleton(field, objToValidate) {
+    const self = this;
+
+    if (!self[field]) {
+      self[field] = new Validator(objToValidate);
+    }
+
+    return self[field];
   }
 
   hasErrors() {
