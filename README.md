@@ -9,7 +9,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/ilya-markevich/node-express-validator/badge.svg)](https://snyk.io/test/github/ilya-markevich/node-express-validator)
 [![node](https://img.shields.io/node/v/express-dee-validator.svg?maxAge=1000)](https://www.npmjs.com/package/express-dee-validator)
 
-Validator for Express framework.
+[Dee-validator](https://github.com/ilya-markevich/node-validator) port for Express framework.
 
 # Table of contents
 * [Usage](#usage)
@@ -18,7 +18,7 @@ Validator for Express framework.
 
 # Usage
 
-The middleware creates validator which contains three [dee-validators](https://github.com/ilya-markevich/node-validator) for: body, query and params objects.
+The middleware creates validator which contains three [dee-validators](https://github.com/ilya-markevich/node-validator) for `req.body`, `req.query` and `req.params` objects.
 You can use each of the validators separately.
 
 The example of code:
@@ -40,7 +40,7 @@ app.use((req, res, next) => {
     const validator = req.validator;
     const { bodyValidator, paramsValidator, queryValidator } = validator;
 
-    console.log(validator.request); // you can get request object from validator
+    console.log(validator.request); // you can get request object from the req.validator
 
     bodyValidator.property('name').isNotEmpty().isTestString();
 
@@ -48,9 +48,9 @@ app.use((req, res, next) => {
 
     queryValidator.property('test').optional().isUpperCaseString();
 
-    if (validator.hasErrors()) { // return true in case if no errors in body, params and request validators
+    if (validator.hasErrors()) { // return true in case if no errors in body, params and query validators
       next({
-        errors: validator.getErrors() // here you can get errors from all the validators.
+        errors: validator.getErrors() // here you can get errors from all of the validators
       });
     } else {
       next();
