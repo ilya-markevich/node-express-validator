@@ -49,11 +49,11 @@ app.use((req, res, next) => {
     queryValidator.property('test').optional().isUpperCaseString();
 
     if (validator.hasErrors()) { // return true in case if no errors in body, params and request validators
-      return Promise.reject({
+      next({
         errors: validator.getErrors() // here you can get errors from all the validators.
       });
     } else {
-      return next();
+      next();
     }
 })
 ```
