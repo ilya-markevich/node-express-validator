@@ -19,7 +19,7 @@
 # Usage
 
 The middleware creates validator which contains three [dee-validators](https://github.com/ilya-markevich/node-validator) for `req.body`, `req.query` and `req.params` objects.
-You can use each of the validators separately.
+You can use each validator separately.
 
 The example of code:
 ```javascript
