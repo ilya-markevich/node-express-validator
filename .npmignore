@@ -1,5 +1,11 @@
 tests
+tsTests
 .nyc_output
 coverage
 .idea
+.eslintrc
+.gitignore
+.nycrc
+.travis.yml
+tsconfig.json
 npm-debug.log
