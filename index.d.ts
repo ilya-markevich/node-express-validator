@@ -1,10 +1,10 @@
-import * as express from 'express';
-import DeeValidator = require('dee-validator');
+import * as express from "express";
+import DeeValidator = require("dee-validator");
 
 declare global {
   namespace Express {
     interface Request {
-      validator: deeExpressValidatorMiddleware.DeeExpressValidator
+      validator: deeExpressValidatorMiddleware.DeeExpressValidator;
     }
   }
 }
@@ -19,14 +19,14 @@ declare namespace deeExpressValidatorMiddleware {
 
     queryValidator: DeeValidator;
 
-    hasErrors(): boolean;
+    hasErrors(): Promise<boolean>;
 
-    getErrors(): DeeValidator.ValidationError[];
+    getErrors(): Promise<DeeValidator.ValidationError[]>;
   }
 }
 
-declare function deeExpressValidatorMiddleware(customValidators?: DeeValidator.ValidatorsObject): express.RequestHandler;
+declare function deeExpressValidatorMiddleware(
+  customValidators?: DeeValidator.ValidatorsObject
+): express.RequestHandler;
 
 export = deeExpressValidatorMiddleware;
-
-

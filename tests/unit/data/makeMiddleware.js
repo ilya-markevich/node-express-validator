@@ -1,11 +1,7 @@
-'use strict';
+"use strict";
 
-const fakeRequest = {
-  body: {},
-  params: {},
-  query: {}
-};
+const fakeRequest = { body: {}, params: {}, query: {} };
 
 module.exports = {
-  fakeRequest
+  fakeRequest,
 };

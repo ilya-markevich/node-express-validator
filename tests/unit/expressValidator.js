@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
-require('should');
-const sinon = require('sinon');
+require("should");
+const sinon = require("sinon");
 
-const ExpressValidator = require('../../src/expressValidator');
-const testData = require('./data/expressValidator');
+const ExpressValidator = require("../../src/expressValidator");
+const testData = require("./data/expressValidator");
 
-describe('Express Validator', () => {
-  describe('Initial State', () => {
-    it('should check initial state', () => {
+describe("Express Validator", () => {
+  describe("Initial State", () => {
+    it("should check initial state", () => {
       const { fakeRequest } = testData;
       const validator = new ExpressValidator(fakeRequest);
 
@@ -18,7 +18,7 @@ describe('Express Validator', () => {
       validator.request.should.be.eql(fakeRequest);
     });
 
-    it('should check singleton getters', () => {
+    it("should check singleton getters", () => {
       const { fakeRequest } = testData;
       const validator = new ExpressValidator(fakeRequest);
 
@@ -32,48 +32,67 @@ describe('Express Validator', () => {
     });
   });
 
-  describe('Static Methods', () => {
-    describe('#extend', () => {
-      it('should call extend even if methods not passed', () => {
+  describe("Static Methods", () => {
+    describe("#extend", () => {
+      // eslint-disable-next-line max-nested-callbacks
+      it("should call extend even if methods not passed", () => {
         ExpressValidator.extend(null);
       });
     });
   });
 
-  describe('#hasErrors', () => {
-    it('should return that validator has errors', () => {
+  describe("#hasErrors", () => {
+    it("should return that validator has errors", async () => {
       const { fakeRequest } = testData;
       const validator = new ExpressValidator(fakeRequest);
 
-      validator.bodyValidator.hasErrors = sinon.stub().returns(false);
-      validator.paramsValidator.hasErrors = sinon.stub().returns(false);
-      validator.queryValidator.hasErrors = sinon.stub().returns(true);
+      validator.bodyValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
+      validator.paramsValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
+      validator.queryValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(true));
 
-      validator.hasErrors().should.be.eql(true);
+      (await validator.hasErrors()).should.be.eql(true);
     });
 
-    it('should return that validator has no errors', () => {
+    it("should return that validator has no errors", async () => {
       const { fakeRequest } = testData;
       const validator = new ExpressValidator(fakeRequest);
 
-      validator.bodyValidator.hasErrors = sinon.stub().returns(false);
-      validator.paramsValidator.hasErrors = sinon.stub().returns(false);
-      validator.queryValidator.hasErrors = sinon.stub().returns(false);
+      validator.bodyValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
+      validator.paramsValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
+      validator.queryValidator.hasErrors = sinon
+        .stub()
+        .returns(Promise.resolve(false));
 
-      validator.hasErrors().should.be.eql(false);
+      (await validator.hasErrors()).should.be.eql(false);
     });
   });
 
-  describe('#getErrors', () => {
-    it('should return errors', () => {
+  describe("#getErrors", () => {
+    it("should return errors", async () => {
       const { fakeRequest, validatorError, expressValidatorErrors } = testData;
       const validator = new ExpressValidator(fakeRequest);
 
-      validator.bodyValidator.getErrors = sinon.stub().returns([validatorError]);
-      validator.paramsValidator.getErrors = sinon.stub().returns([]);
-      validator.queryValidator.getErrors = sinon.stub().returns([]);
+      validator.bodyValidator.getErrors = sinon
+        .stub()
+        .returns(Promise.resolve([validatorError]));
+      validator.paramsValidator.getErrors = sinon
+        .stub()
+        .returns(Promise.resolve([]));
+      validator.queryValidator.getErrors = sinon
+        .stub()
+        .returns(Promise.resolve([]));
 
-      validator.getErrors().should.be.eql(expressValidatorErrors);
+      (await validator.getErrors()).should.be.eql(expressValidatorErrors);
     });
   });
 });
