@@ -12,9 +12,15 @@
 [Dee-validator](https://github.com/ilya-markevich/node-validator) port for Express framework.
 
 # Table of contents
+* [Migration to v2](#migration-to-v2)
 * [Usage](#usage)
 * [What's in a name?](#whats-in-a-name)
 * [Author](#author)
+
+# Migration to v2
+
+The [v1](https://github.com/ilya-markevich/node-express-validator/tree/v1.1.1) doesn't support async validators meaning the API is synchronous.
+For migration to v2, await `getErrors` and `hasErrors` methods.
 
 # Usage
 
@@ -36,7 +42,7 @@ const customValidators = { // custom validators
 
 app.use(validator(customValidators));
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
     const validator = req.validator;
     const { bodyValidator, paramsValidator, queryValidator } = validator;
 
@@ -48,9 +54,9 @@ app.use((req, res, next) => {
 
     queryValidator.property('test').optional().isUpperCaseString();
 
-    if (validator.hasErrors()) { // return true in case if no errors in body, params and query validators
+    if (await validator.hasErrors()) { // return true in case if no errors in body, params and query validators
       next({
-        errors: validator.getErrors() // here you can get errors from all of the validators
+        errors: await validator.getErrors() // here you can get errors from all of the validators
       });
     } else {
       next();

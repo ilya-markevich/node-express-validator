@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Validator = require('dee-validator');
+const Validator = require("dee-validator");
 
 class ExpressValidator {
   constructor(req) {
@@ -15,53 +15,52 @@ class ExpressValidator {
   }
 
   get bodyValidator() {
-    const self = this;
-
-    return self._getSingleton('_bodyValidator', self.request.body);
+    return this._getSingleton("_bodyValidator", this.request.body);
   }
 
   get paramsValidator() {
-    const self = this;
-
-    return self._getSingleton('_paramsValidator', self.request.params);
+    return this._getSingleton("_paramsValidator", this.request.params);
   }
 
   get queryValidator() {
-    const self = this;
-
-    return self._getSingleton('_queryValidator', self.request.query);
+    return this._getSingleton("_queryValidator", this.request.query);
   }
 
   _getSingleton(field, objToValidate) {
-    const self = this;
-
-    if (!self[field]) {
-      self[field] = new Validator(objToValidate);
+    if (!this[field]) {
+      this[field] = new Validator(objToValidate);
     }
 
-    return self[field];
+    return this[field];
   }
 
-  hasErrors() {
-    const self = this;
+  async hasErrors() {
+    const hasErrorsResults = await Promise.all([
+      this.bodyValidator.hasErrors(),
+      this.paramsValidator.hasErrors(),
+      this.queryValidator.hasErrors(),
+    ]);
 
-    return self.bodyValidator.hasErrors() || self.paramsValidator.hasErrors() || self.queryValidator.hasErrors();
+    return hasErrorsResults.some((hasError) => hasError);
   }
 
-  getErrors() {
-    const self = this;
-    const validators = [self.bodyValidator, self.paramsValidator, self.queryValidator];
-    const errorsObj = {};
+  async getErrors() {
+    const validators = [
+      this.bodyValidator,
+      this.paramsValidator,
+      this.queryValidator,
+    ];
+    const validatorsErrors = await Promise.all(
+      validators.map((validator) => validator.getErrors())
+    );
 
-    validators.reduce((errors, validator) => errors.concat(validator.getErrors()), []).forEach(({ path, errorMessage, value }) => {
-      errorsObj[path] = {
-        param: path,
-        msg: errorMessage,
-        value
-      };
-    });
+    return validatorsErrors.reduce((result, validationErrors) => {
+      validationErrors.forEach(({ path, errorMessage, value }) => {
+        result[path] = { param: path, msg: errorMessage, value };
+      });
 
-    return errorsObj;
+      return result;
+    }, {});
   }
 
   static extend(customMethods) {

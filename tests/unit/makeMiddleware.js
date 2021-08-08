@@ -1,21 +1,21 @@
-'use strict';
+"use strict";
 
-require('should');
-const sinon = require('sinon');
+require("should");
+const sinon = require("sinon");
 
-const makeMiddleware = require('../../src/makeMiddleware');
-const testData = require('./data/makeMiddleware');
+const makeMiddleware = require("../../src/makeMiddleware");
+const testData = require("./data/makeMiddleware");
 
-describe('Make Middleware', () => {
-  describe('middleware', () => {
-    it('should add validator to request', () => {
+describe("Make Middleware", () => {
+  describe("middleware", () => {
+    it("should add validator to request", () => {
       const { fakeRequest } = testData;
       const next = sinon.mock().once();
       const middleware = makeMiddleware(null);
 
       middleware(fakeRequest, {}, next);
 
-      fakeRequest.should.have.property('validator');
+      fakeRequest.should.have.property("validator");
       next.verify();
     });
   });
