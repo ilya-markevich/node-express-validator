@@ -6,11 +6,11 @@
 [Dee-validator](https://github.com/ilya-markevich/node-validator) port for Express framework.
 
 # Table of contents
-* [Migration to v2/v3](#migration-to-v2)
+* [Migration to v2/v3](#migration-to-v2-v3)
 * [Usage](#usage)
 * [Author](#author)
 
-# Migration to v2
+# Migration to v2-v3
 
 The [v1](https://github.com/ilya-markevich/node-express-validator/tree/v1.1.1) doesn't support async validators meaning the API is synchronous.
 For migration to v2/v3, await `getErrors` and `hasErrors` methods.
