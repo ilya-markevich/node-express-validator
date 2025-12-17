@@ -1,8 +1,6 @@
-"use strict";
+import ExpressValidator from './expressValidator';
 
-const ExpressValidator = require("./expressValidator");
-
-module.exports = (customMethods) => (req, res, next) => {
+export default (customMethods) => (req, res, next) => {
   req.validator = new ExpressValidator(req);
   ExpressValidator.extend(customMethods);
 

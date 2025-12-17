@@ -1,6 +1,4 @@
-"use strict";
-
-const Validator = require("dee-validator");
+import Validator from 'dee-validator';
 
 class ExpressValidator {
   constructor(req) {
@@ -15,15 +13,15 @@ class ExpressValidator {
   }
 
   get bodyValidator() {
-    return this._getSingleton("_bodyValidator", this.request.body);
+    return this._getSingleton('_bodyValidator', this.request.body);
   }
 
   get paramsValidator() {
-    return this._getSingleton("_paramsValidator", this.request.params);
+    return this._getSingleton('_paramsValidator', this.request.params);
   }
 
   get queryValidator() {
-    return this._getSingleton("_queryValidator", this.request.query);
+    return this._getSingleton('_queryValidator', this.request.query);
   }
 
   _getSingleton(field, objToValidate) {
@@ -38,29 +36,19 @@ class ExpressValidator {
     const hasErrorsResults = await Promise.all([
       this.bodyValidator.hasErrors(),
       this.paramsValidator.hasErrors(),
-      this.queryValidator.hasErrors(),
+      this.queryValidator.hasErrors()
     ]);
 
     return hasErrorsResults.some((hasError) => hasError);
   }
 
   async getErrors() {
-    const validators = [
-      this.bodyValidator,
-      this.paramsValidator,
-      this.queryValidator,
-    ];
+    const validators = [this.bodyValidator, this.paramsValidator, this.queryValidator];
     const validatorsErrors = await Promise.all(
       validators.map((validator) => validator.getErrors())
     );
 
-    return validatorsErrors.reduce((result, validationErrors) => {
-      validationErrors.forEach(({ path, errorMessage, value }) => {
-        result[path] = { param: path, msg: errorMessage, value };
-      });
-
-      return result;
-    }, {});
+    return validatorsErrors.flatMap((errors) => errors);
   }
 
   static extend(customMethods) {
@@ -68,4 +56,4 @@ class ExpressValidator {
   }
 }
 
-module.exports = ExpressValidator;
+export default ExpressValidator;
