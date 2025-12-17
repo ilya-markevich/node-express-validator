@@ -9,12 +9,12 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "esModuleInterop": true,
     "pretty": true,
     "removeComments": true,
     "strictNullChecks": true,
+    "skipLibCheck": true,
     "target": "es6"
   },
-  "include": [
-    "tsTests/**/*"
-  ]
+  "include": ["tsTests/**/*", "index.d.ts"]
 }

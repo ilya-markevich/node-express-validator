@@ -1,5 +1,7 @@
-import validator = require("../index");
-import * as express from "express";
+/* eslint-disable no-console */
+
+import validator from '../index';
+import express from 'express';
 
 const app = express();
 
@@ -11,9 +13,9 @@ app.use(async (req, _, next) => {
 
   requestObj.accepts();
 
-  bodyValidator.property("prop1").optional().isArray();
-  paramsValidator.property("prop2").isNotEmpty().withMessage("test message");
-  queryValidator.property("prop3").optional().isBoolean();
+  bodyValidator.property('prop1').optional().isArray();
+  paramsValidator.property('prop2').isNotEmpty().withMessage('test message');
+  queryValidator.property('prop3').optional().isBoolean();
 
   const hasErrors = await req.validator.hasErrors();
 
@@ -21,10 +23,11 @@ app.use(async (req, _, next) => {
     const errors = await req.validator.getErrors();
 
     errors.forEach((error) => {
-      console.log(`${error.value}, ${error.errorMessage}, ${error.path}`);
+      console.log(`${error.value as string}, ${error.errorMessage}, ${error.path}`);
     });
 
     next(errors);
+
     return;
   }
 

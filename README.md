@@ -2,25 +2,18 @@
 
 [![npm](https://img.shields.io/npm/v/express-dee-validator.svg?maxAge=1000)](https://www.npmjs.com/package/express-dee-validator)
 [![npm](https://img.shields.io/npm/dt/express-dee-validator.svg?maxAge=1000)](https://www.npmjs.com/package/express-dee-validator)
-[![Coverage Status](https://coveralls.io/repos/github/ilya-markevich/node-express-validator/badge.svg?branch=master)](https://coveralls.io/github/ilya-markevich/node-express-validator?branch=master)
-[![dependency Status](https://img.shields.io/david/ilya-markevich/node-express-validator.svg?maxAge=1000)](https://david-dm.org/ilya-markevich/node-express-validator)
-[![devDependency Status](https://img.shields.io/david/dev/ilya-markevich/node-express-validator.svg?maxAge=1000)](https://david-dm.org/ilya-markevich/node-express-validator?type=dev)
-[![Build Status](https://img.shields.io/travis/ilya-markevich/node-express-validator.svg?maxAge=1000)](https://travis-ci.org/ilya-markevich/node-express-validator)
-[![Known Vulnerabilities](https://snyk.io/test/github/ilya-markevich/node-express-validator/badge.svg)](https://snyk.io/test/github/ilya-markevich/node-express-validator)
-[![node](https://img.shields.io/node/v/express-dee-validator.svg?maxAge=1000)](https://www.npmjs.com/package/express-dee-validator)
 
 [Dee-validator](https://github.com/ilya-markevich/node-validator) port for Express framework.
 
 # Table of contents
-* [Migration to v2](#migration-to-v2)
+* [Migration to v2/v3](#migration-to-v2)
 * [Usage](#usage)
-* [What's in a name?](#whats-in-a-name)
 * [Author](#author)
 
 # Migration to v2
 
 The [v1](https://github.com/ilya-markevich/node-express-validator/tree/v1.1.1) doesn't support async validators meaning the API is synchronous.
-For migration to v2, await `getErrors` and `hasErrors` methods.
+For migration to v2/v3, await `getErrors` and `hasErrors` methods.
 
 # Usage
 
@@ -82,8 +75,5 @@ Example of errors format:
 }
 ```
 
-# What's in a name?
-Dee is one of my favorite detective characters - [Judge Dee](https://en.wikipedia.org/wiki/Judge_Dee).
-
 # Author
-Ilya Markevich - [@ilya_mark91](https://twitter.com/ilya_mark91)
+Ilya Markevich
