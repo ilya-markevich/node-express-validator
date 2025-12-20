@@ -4,7 +4,7 @@
     "name": "Ilya Markevich",
     "url": "https://github.com/ilya-markevich"
   },
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Object fields validator for express framework",
   "keywords": [
     "validator",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@types/express": "5.0.6",
-    "dee-validator": "2.1.0"
+    "dee-validator": "2.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.28.5",
